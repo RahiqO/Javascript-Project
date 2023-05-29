@@ -1,7 +1,7 @@
 function metadata(sample_one){ 
 drop_down = d3.select("#selDataset")
 d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then (data => {
-id_data = data.names 
+id_data = data.metadata
 
 
 id_data.forEach((id) => {
@@ -51,8 +51,9 @@ let layout = {
     t: 100,
     b: 100
   }
-  console.log(bar_data)
+
 }})}
+console.log(bar_data)
 
 function bubble_grapgh(sample_two){
 // Render the plot to the div tag with id "plot"
@@ -84,12 +85,14 @@ var trace_bubble = {
 // bar_data("940")
 
 function init(){
-     d3.json(url).then((data) => {
+     d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
+     id_data = data.names 
     id_data.forEach(id => drop_down.append("option").attr("value",id ).text(id));
     
     let Theid = id_data[0];
     optionChanged(Theid);
-    
+    init();
+    metadata();
     }
      )}
 
