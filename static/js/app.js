@@ -1,4 +1,4 @@
-function metadata(sample_one){ 
+function metadata(sample_no){ 
 drop_down = d3.select("#selDataset")
 d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then (data => {
 id_data = data.metadata
@@ -29,7 +29,7 @@ otu_labels = data.samples.filter(itm => itm.id == sample_no)[0].otu_labels
  labels_slicedData = otu_labels.slice(0, 10).reverse();
 
 
-// Trace1 for the Greek Data
+
 let trace1 = {
   x: slicedData,
   y: id_slicedData.map(item => `OTU${item}`),
@@ -38,11 +38,9 @@ let trace1 = {
   type: "bar"
 };
 
-// Data array
-// `data` has already been defined, so we must choose a new name here:
+
 let traceData = [trace1];
 
-// Apply a title to the layout
 let layout = {
   title: "horizontal bar chart ",
   margin: {
@@ -55,7 +53,7 @@ let layout = {
 }})}
 console.log(bar_data)
 
-function bubble_grapgh(sample_two){
+function bubble_grapgh(sample_no){
 // Render the plot to the div tag with id "plot"
 // Note that we use `traceData` here, not `data`
 Plotly.newPlot("bar", traceData, layout);
@@ -78,7 +76,7 @@ var trace_bubble = {
     showlegend: false,
   };
   
-  Plotly.newPlot('bubble', data, layout_bubble);
+  Plotly.newPlot("bubble", data, layout_bubble);
   console.log(bubble_grapgh)
 }
 
@@ -90,9 +88,11 @@ function init(){
     id_data.forEach(id => drop_down.append("option").attr("value",id ).text(id));
     
     let Theid = id_data[0];
-    optionChanged(Theid);
+
     init();
     metadata();
+    bubble_grapgh(Theid);
+    bar_data(Theid);
     }
      )}
 
