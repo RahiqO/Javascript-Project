@@ -1,7 +1,8 @@
+function metadata(sample_one){ 
 drop_down = d3.select("#selDataset")
 d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then (data => {
 id_data = data.names 
-// console.log(id_data);
+
 
 id_data.forEach((id) => {
     console.log(id)
@@ -9,7 +10,7 @@ id_data.forEach((id) => {
 })
 
 
-})
+})}
 
 
 
@@ -50,8 +51,10 @@ let layout = {
     t: 100,
     b: 100
   }
-};
+  console.log(bar_data)
+}})}
 
+function bubble_grapgh(sample_two){
 // Render the plot to the div tag with id "plot"
 // Note that we use `traceData` here, not `data`
 Plotly.newPlot("bar", traceData, layout);
@@ -75,14 +78,18 @@ var trace_bubble = {
   };
   
   Plotly.newPlot('bubble', data, layout_bubble);
-})}
+  console.log(bubble_grapgh)
+}
 
-bar_data("940")
+// bar_data("940")
 
+function init(){
+     d3.json(url).then((data) => {
+    id_data.forEach(id => drop_down.append("option").attr("value",id ).text(id));
+    
+    let Theid = id_data[0];
+    optionChanged(Theid);
+    
+    }
+     )}
 
-let tbody1 = d3.select(".panel-body").append("li").text("id:940")
-let tbody2 = d3.select(".panel-body").append("li").text("ethnicity: Caucasian")
-let tbody3 = d3.select(".panel-body").append("li").text("age:24")
-let tbody4 = d3.select(".panel-body").append("li").text("location:Beaufort/NC")
-let tbody5 = d3.select(".panel-body").append("li").text("bbtype: I")
-let tbody6 = d3.select(".panel-body").append("li").text("wfreq:2")
