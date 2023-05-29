@@ -79,14 +79,10 @@ var trace_bubble = {
 
 bar_data("940")
 
-// data1= 
-// String[] choices = { "CHOICE 1", "CHOICE 2", "CHOICE 3", "CHOICE 4",
-// "CHOICE 5", "CHOICE 6" };
-// final JComboBox<String> cb = new JComboBox<String>(choices);
-// d3.select("selDataset")
-// let tbody1 = d3.select(".panel-body").append("li").text("id:940")
-// let tbody2 = d3.select(".panel-body").append("li").text("ethnicity: Caucasian")
-// let tbody3 = d3.select(".panel-body").append("li").text("age:24")
-// let tbody4 = d3.select(".panel-body").append("li").text("location:Beaufort/NC")
-// let tbody5 = d3.select(".panel-body").append("li").text("bbtype: I")
-// let tbody6 = d3.select(".panel-body").append("li").text("wfreq:2")
+
+let tbody1 = d3.select(".panel-body").append("li").text("id:940")
+let tbody2 = d3.select(".panel-body").append("li").text("ethnicity: Caucasian")
+let tbody3 = d3.select(".panel-body").append("li").text("age:24")
+let tbody4 = d3.select(".panel-body").append("li").text("location:Beaufort/NC")
+let tbody5 = d3.select(".panel-body").append("li").text("bbtype: I")
+let tbody6 = d3.select(".panel-body").append("li").text("wfreq:2")
