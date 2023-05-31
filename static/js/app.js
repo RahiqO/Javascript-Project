@@ -84,13 +84,25 @@ function metadata(sample_no){
   })}
   
 
-  
+
   function init(){
 
     let selector = d3.select("#selDataset");      // added by Deepali - this is the selector for the drop_down. Just replace the "drop_down" with "selector" in line 91
        d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
-       id_data = data.names 
-      id_data.forEach(id => selector.append("option").attr("value",id ).text(id));       // changed by Deepali - drop_down isnt defined anywhere. Grab a reference to the dropdown select element
+       let id_data = data.names 
+       for (let i = 0; i < id_data.length; i++){
+        selector
+          .append("option")
+          .text(id_data[i])
+          .property("value", id_data[i]);
+      };
+  
+  // function init(){
+
+  //   let selector = d3.select("#selDataset");      // added by Deepali - this is the selector for the drop_down. Just replace the "drop_down" with "selector" in line 91
+  //      d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
+  //      id_data = data.names 
+  //     id_data.forEach(id => selector.append("option").attr("value",id ).text(id));       // changed by Deepali - drop_down isnt defined anywhere. Grab a reference to the dropdown select element
       
       let Theid = id_data[0];
   
@@ -98,8 +110,14 @@ function metadata(sample_no){
       metadata();
       bubble_grapgh(Theid);
       bar_data(Theid);
+      function optionChanged(newSample) {
+        // Fetch new data each time a new sample is selected
+    bar_data(newSample);
+    bubble_graph(newSample);
+    }
       }
        )}
 
-    
+
        init();      //added by Deepali - need to initialize the function outside of the function. 
+ 
