@@ -1,17 +1,24 @@
 function metadata(sample_no){ 
   drop_down = d3.select("#selDataset")
   d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then (data => {
-  id_data = data.metadata
+  let id_data = data.metadata
+  let sample_values = id_data.filter(sampleObj => sampleObj.id == sample_no)
+  let first_value = sample_values[0]
+  let PANEL = d3.select("#sample-metadata");
+  PANEL.html("");
+
+ 
+  for (key in first_value){
+    PANEL.append("h6").text(`${key.toUpperCase()}: ${first_value[key]}`);
+  };
+
   
   
-  id_data.forEach((id) => {
-      console.log(id)
-      drop_down.append("option").text(id).property("value",id)
-  })
+
   
   
-  })}
-  
+  });
+}
   
   
    function bar_data (sample_no){
@@ -48,8 +55,7 @@ function metadata(sample_no){
   }
 
 
-  Plotly.newPlot("bar", traceData, layout);        //moved by Deepali - moved from within bubble_grapgh() function to here. Plotly.newPlot needs to be called withing its own function.
-
+  Plotly.newPlot("bar", traceData, layout);        
 })
 }
 
@@ -80,14 +86,14 @@ function metadata(sample_no){
     };
     
     Plotly.newPlot("bubble", data, layout_bubble);
-    console.log(bubble_grapgh)
+    
   })}
   
 
 
   function init(){
 
-    let selector = d3.select("#selDataset");      // added by Deepali - this is the selector for the drop_down. Just replace the "drop_down" with "selector" in line 91
+    let selector = d3.select("#selDataset");     
        d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
        let id_data = data.names 
        for (let i = 0; i < id_data.length; i++){
@@ -97,27 +103,21 @@ function metadata(sample_no){
           .property("value", id_data[i]);
       };
   
-  // function init(){
-
-  //   let selector = d3.select("#selDataset");      // added by Deepali - this is the selector for the drop_down. Just replace the "drop_down" with "selector" in line 91
-  //      d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
-  //      id_data = data.names 
-  //     id_data.forEach(id => selector.append("option").attr("value",id ).text(id));       // changed by Deepali - drop_down isnt defined anywhere. Grab a reference to the dropdown select element
-      
+ 
       let Theid = id_data[0];
-  
-      //init();
-      metadata();
-      bubble_grapgh(Theid);
       bar_data(Theid);
-      function optionChanged(newSample) {
-        // Fetch new data each time a new sample is selected
-    bar_data(newSample);
-    bubble_graph(newSample);
-    }
+      bubble_grapgh(Theid);
+      metadata(Theid);
+      
+     
       }
        )}
 
-
-       init();      //added by Deepali - need to initialize the function outside of the function. 
+       function optionChanged(newSample) {
+        
+    bar_data(newSample);
+    bubble_grapgh(newSample);
+    metadata(newSample)
+    }
+       init();      
  
